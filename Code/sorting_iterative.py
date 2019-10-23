@@ -1,11 +1,17 @@
 #!python
 
+import os
+import time
 
 def is_sorted(items):
     """Return a boolean indicating whether given items are in sorted order.
     TODO: Running time: ??? Why and under what conditions?
     TODO: Memory usage: ??? Why and under what conditions?"""
-    # TODO: Check that all adjacent items are in order, return early if so
+    for i, item in enumerate(items):
+        if i == len(items) - 1:
+            return True
+        if item > items[i+1]:
+            return False
 
 
 def bubble_sort(items):
@@ -35,3 +41,20 @@ def insertion_sort(items):
     # TODO: Repeat until all items are in sorted order
     # TODO: Take first unsorted item
     # TODO: Insert it in sorted order in front of items
+
+if __name__ == "__main__":
+
+    arr = [1, 6, 7, 3, 5]
+    print(f"array: {arr}")
+    print(f"is sorted: {is_sorted(arr)}")
+    if not is_sorted(arr):
+        print(f"Method: Bubble Sort")
+        print(f"Sorting...")
+        # arr = bubble_sort(arr)
+        print(f"Done")
+        print(f"array: {arr}")
+    else:
+        print(f"array is already sorted")
+
+    
+
