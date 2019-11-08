@@ -9,12 +9,16 @@ def is_sorted(items):
     Running time: O(n) - iterates through all elements in array  worst case
     Memory usage: O(1) - no new memory used
     """
-    for i, item in enumerate(items):
-        if i == len(items) - 1:
+    # for i, item in enumerate(items):
+    #     if i == len(items) - 1:
+    #         return True
+    #     if item > items[i+1]:
+    #         return False
+    for i in range(0, len(items)):
+        if items[i] == len(items) - 1:
             return True
-        if item > items[i+1]:
+        if items[i] > items[i+1]:
             return False
-
 
 def bubble_sort(items):
     """
@@ -47,7 +51,7 @@ def selection_sort(items):
     unsorted item, and repeating until all items are in sorted order.
     TODO: Running time: ??? Why and under what conditions?
     TODO: Memory usage: ??? Why and under what conditions?"""
-    # TODO: Repeat until all items are in sorted order
+    # Repeat until all items are in sorted order
     # TODO: Find minimum item in unsorted items
     # TODO: Swap it with first unsorted item
 
@@ -66,7 +70,9 @@ if __name__ == "__main__":
     arr = [1, 6, 7, 3, 5]
     print(f"array: {arr}")
     print(f"is sorted: {is_sorted(arr)}")
-    if not is_sorted(arr):
+    if is_sorted(arr):
+        print(f"array is already sorted")
+    else:
         print("b for bubble sort")
         print("s for selection sort")
         method = input("method: ")
@@ -78,8 +84,6 @@ if __name__ == "__main__":
             print(f"array: {arr}")
         else:
             print("method not found")
-    else:
-        print(f"array is already sorted")
 
     
 
