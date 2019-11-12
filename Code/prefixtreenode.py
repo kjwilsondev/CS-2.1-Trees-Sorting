@@ -22,7 +22,8 @@ class PrefixTreeNode:
         self.character = character
         # Data structure to associate character keys to children node values
         # self.children = PrefixTreeNode.CHILDREN_TYPE()
-        self.children = []
+        # https://stackoverflow.com/questions/10712002/create-an-empty-list-in-python-with-certain-size
+        self.children = [None] * 26
         # Marks if this node terminates a string in the prefix tree
         self.terminal = False
 
@@ -48,8 +49,7 @@ class PrefixTreeNode:
         # Check if given character is amongst this node's children
         # Check ascii slot in children list
         # http://www.asciitable.com
-        print(ord(character)-97)
-
+        return self.children[ord(character)-97] != None
 
     # def get_child(self, character):
     #     """Return this prefix tree node's child node that represents the given
@@ -76,5 +76,18 @@ class PrefixTreeNode:
     #     return f'({self.character})'
 
 if __name__ == "__main__":
-    node = PrefixTreeNode("a")
-    node.has_child("a")
+    # Create root node
+    root = PrefixTreeNode("")
+    # Create child node
+    a = PrefixTreeNode("a")
+    root.children[0] = a
+    # has child "a" should be true
+    print(root.has_child("a"))
+    # has child "b" should be false
+    print(root.has_child("b"))
+
+
+    # raise error if not a letter
+    # if not character.isalpha():
+    #     raise TypeError("child node is a not a letter")
+    # print(node.has_child("1"))
