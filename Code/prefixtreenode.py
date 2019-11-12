@@ -2,18 +2,22 @@
 
 
 class PrefixTreeNode:
-    """PrefixTreeNode: A node for use in a prefix tree that stores a single
+    """
+    PrefixTreeNode: A node for use in a prefix tree that stores a single
     character from a string and a structure of children nodes below it, which
     associates the next character in a string to the next node along its path from
-    the tree's root node to a terminal node that marks the end of the string."""
+    the tree's root node to a terminal node that marks the end of the string.
+    """
 
     # Choose a type of data structure to store children nodes in
     # Hint: Choosing list or dict affects implementation of all child methods
     CHILDREN_TYPE = None
 
     def __init__(self, character=None):
-        """Initialize this prefix tree node with the given character value, an
-        empty structure of children nodes, and a boolean terminal property."""
+        """
+        Initialize this prefix tree node with the given character value, an
+        empty structure of children nodes, and a boolean terminal property.
+        """
         # Character that this node represents
         self.character = character
         # Data structure to associate character keys to children node values
@@ -22,17 +26,26 @@ class PrefixTreeNode:
         self.terminal = False
 
     def is_terminal(self):
-        """Return True if this prefix tree node terminates a string."""
-        # TODO: Determine if this node is terminal
+        """
+        Return True if this prefix tree node terminates a string.
+        """
+        # Determine if this node is terminal
+        return self.terminal
 
     def num_children(self):
-        """Return the number of children nodes this prefix tree node has."""
-        # TODO: Determine how many children this node has
+        """
+        Return the number of children nodes this prefix tree node has.
+        """
+        # Determine how many children this node has
+        return len(self.children)
 
     def has_child(self, character):
-        """Return True if this prefix tree node has a child node that
-        represents the given character amongst its children."""
-        # TODO: Check if given character is amongst this node's children
+        """
+        Return True if this prefix tree node has a child node that
+        represents the given character amongst its children.
+        """
+        # Check if given character is amongst this node's children
+
 
     def get_child(self, character):
         """Return this prefix tree node's child node that represents the given
