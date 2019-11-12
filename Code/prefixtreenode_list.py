@@ -9,9 +9,9 @@ class PrefixTreeNode:
     the tree's root node to a terminal node that marks the end of the string.
     """
 
-    # Dict data structure to store children nodes in
-    # Chose dict to save memory
-    CHILDREN_TYPE = dict
+    # List data structure to store children nodes in
+    # Chose list for constant time searching
+    CHILDREN_TYPE = list
 
     def __init__(self, character=None):
         """
@@ -23,7 +23,7 @@ class PrefixTreeNode:
         # Data structure to associate character keys to children node values
         # self.children = PrefixTreeNode.CHILDREN_TYPE()
         # https://stackoverflow.com/questions/10712002/create-an-empty-list-in-python-with-certain-size
-        self.children = {}
+        self.children = [None] * 26
         # Marks if this node terminates a string in the prefix tree
         self.terminal = False
 
@@ -47,7 +47,9 @@ class PrefixTreeNode:
         represents the given character amongst its children.
         """
         # Check if given character is amongst this node's children
-        return character in self.children.keys()
+        # Check ascii slot in children list
+        # http://www.asciitable.com
+        return self.children[ord(character)-97] != None
 
     def get_child(self, character):
         """
@@ -55,7 +57,7 @@ class PrefixTreeNode:
         character if it is amongst its children, or raise ValueError if not.
         """
         if self.has_child(character):
-            return self.children[character]
+            return self.children[ord(character)-97]
         else:
             raise ValueError(f'No child exists for character {character!r}')
 
@@ -66,7 +68,7 @@ class PrefixTreeNode:
         """
         if not self.has_child(character):
             # Add given character and child node to this node's children
-            self.children[character] = child_node
+            self.children[ord(character)-97] = child_node
         else:
             raise ValueError(f'Child exists for character {character!r}')
 
@@ -108,7 +110,7 @@ if __name__ == "__main__":
     print(f"(k) => {root.get_child('k')}")
     # prints <__main__.PrefixTreeNode object at storage refrence>
     # Let's try to access j from root
-    print(f"True => {root.children['k'].has_child('j')}")
+    print(f"True => {root.children[ord('k')-97].has_child('j')}")
 
     # raise error if not a letter
     # if not character.isalpha():
