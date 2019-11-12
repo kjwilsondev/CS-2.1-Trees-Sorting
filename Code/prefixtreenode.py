@@ -51,13 +51,15 @@ class PrefixTreeNode:
         # http://www.asciitable.com
         return self.children[ord(character)-97] != None
 
-    # def get_child(self, character):
-    #     """Return this prefix tree node's child node that represents the given
-    #     character if it is amongst its children, or raise ValueError if not."""
-    #     if self.has_child(character):
-    #         # TODO: Find child node for given character in this node's children
-    #     else:
-    #         raise ValueError(f'No child exists for character {character!r}')
+    def get_child(self, character):
+        """
+        Return this prefix tree node's child node that represents the given
+        character if it is amongst its children, or raise ValueError if not.
+        """
+        if self.has_child(character):
+            return self.children[ord(character)-97]
+        else:
+            raise ValueError(f'No child exists for character {character!r}')
 
     # def add_child(self, character, child_node):
     #     """Add the given character and child node as a child of this node, or
@@ -76,15 +78,29 @@ class PrefixTreeNode:
     #     return f'({self.character})'
 
 if __name__ == "__main__":
+    # TEST: Initialize Nodes
     # Create root node
     root = PrefixTreeNode("")
     # Create child node
-    a = PrefixTreeNode("a")
-    root.children[0] = a
-    # has child "a" should be true
-    print(root.has_child("a"))
-    # has child "b" should be false
-    print(root.has_child("b"))
+    k = PrefixTreeNode("k")
+    root.children[ord("k")-97] = k
+    # Create grandchild node
+    j = PrefixTreeNode("j")
+    k.children[ord("j")-97] = j
+
+    # TEST: has_child()
+    # root has child "a" should be true
+    print(root.has_child("k"))
+    # root has child "b" should be false
+    print(root.has_child("j"))
+
+    # TEST: get_child()
+    # root get child "a" should return a
+    print(root.get_child("k"))
+    # prints <__main__.PrefixTreeNode object at storage refrence>
+    # Let's try to access j from k
+    # This should print True
+    print(root.children[ord("k")-97].has_child("j"))
 
 
     # raise error if not a letter
