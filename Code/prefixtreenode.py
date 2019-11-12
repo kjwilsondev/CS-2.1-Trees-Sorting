@@ -61,47 +61,56 @@ class PrefixTreeNode:
         else:
             raise ValueError(f'No child exists for character {character!r}')
 
-    # def add_child(self, character, child_node):
-    #     """Add the given character and child node as a child of this node, or
-    #     raise ValueError if given character is amongst this node's children."""
-    #     if not self.has_child(character):
-    #         # TODO: Add given character and child node to this node's children
-    #     else:
-    #         raise ValueError(f'Child exists for character {character!r}')
+    def add_child(self, character, child_node):
+        """
+        Add the given character and child node as a child of this node, or
+        raise ValueError if given character is amongst this node's children.
+        """
+        if not self.has_child(character):
+            # Add given character and child node to this node's children
+            self.children[ord(character)-97] = child_node
+        else:
+            raise ValueError(f'Child exists for character {character!r}')
 
-    # def __repr__(self):
-    #     """Return a code representation of this prefix tree node."""
-    #     return f'PrefixTreeNode({self.character!r})'
+    def __repr__(self):
+        """
+        Return a code representation of this prefix tree node.
+        """
+        return f'PrefixTreeNode({self.character!r})'
 
-    # def __str__(self):
-    #     """Return a string view of this prefix tree node."""
-    #     return f'({self.character})'
+    def __str__(self):
+        """
+        Return a string view of this prefix tree node.
+        """
+        return f'({self.character})'
 
 if __name__ == "__main__":
     # TEST: Initialize Nodes
     # Create root node
     root = PrefixTreeNode("")
+    print(f"root => {root}")
+
+    # TEST: add_child()
     # Create child node
     k = PrefixTreeNode("k")
-    root.children[ord("k")-97] = k
+    root.add_child(k.character, k)
     # Create grandchild node
     j = PrefixTreeNode("j")
-    k.children[ord("j")-97] = j
+    k.add_child(j.character, j)
 
     # TEST: has_child()
     # root has child "a" should be true
     print(root.has_child("k"))
+    print(f"True => {root.has_child('k')}")
     # root has child "b" should be false
-    print(root.has_child("j"))
+    print(f"False => {root.has_child('j')}")
 
     # TEST: get_child()
     # root get child "a" should return a
-    print(root.get_child("k"))
+    print(f"(k) => {root.get_child('k')}")
     # prints <__main__.PrefixTreeNode object at storage refrence>
-    # Let's try to access j from k
-    # This should print True
-    print(root.children[ord("k")-97].has_child("j"))
-
+    # Let's try to access j from root
+    print(f"True => {root.children[ord('k')-97].has_child('j')}")
 
     # raise error if not a letter
     # if not character.isalpha():
