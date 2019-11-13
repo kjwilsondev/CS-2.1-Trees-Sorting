@@ -24,6 +24,10 @@ class PrefixTreeNode:
         # self.children = PrefixTreeNode.CHILDREN_TYPE()
         # https://stackoverflow.com/questions/10712002/create-an-empty-list-in-python-with-certain-size
         self.children = {}
+        # tracks number of searches
+        self.popularity = 0
+        # tracks length of word
+        self.depth = 0
         # Marks if this node terminates a string in the prefix tree
         self.terminal = False
 

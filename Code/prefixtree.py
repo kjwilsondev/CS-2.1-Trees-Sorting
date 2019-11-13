@@ -71,18 +71,29 @@ class PrefixTree:
         """
         # Start with root
         node = self.root
+        depth = 0
         # Iterate through letters in string
         for letter in string:
             # Check if node has child matching letter
             if node.has_child(letter):
-                return False
-            # Move to next node
-            node = node.get_child(letter)
-        # Returns node if it is an ending node
-        return node.terminal
+                # move on to the next node
+                node = node.get_child(letter)
+                depth = node.depth
+            else:
+                # create a child node
+                child = PrefixTreeNode(letter)
+                # add it as a child to the node
+                node.add_child(letter, child)
+                # move on to the next node
+                node = node.get_child(letter)
+                node.depth += 1
+        # On the last node make terminal true
+        node.terminal = True
+        # no return statement
 
     def _find_node(self, string):
-        """Return a tuple containing the node that terminates the given string
+        """
+        Return a tuple containing the node that terminates the given string
         in this prefix tree and the node's depth, or if the given string is not
         completely found, return None and the depth of the last matching node.
         Search is done iteratively with a loop starting from the root node."""
