@@ -4,22 +4,30 @@ from prefixtreenode import PrefixTreeNode
 
 
 class PrefixTree:
-    """PrefixTree: A multi-way prefix tree that stores strings with efficient
-    methods to insert a string into the tree, check if it contains a matching
-    string, and retrieve all strings that start with a given prefix string.
+    """
+    PrefixTree: 
+    A multi-way prefix tree that stores strings 
+    with efficient methods to insert a string into the tree:
+    check if it contains a matching string,
+    and retrieve all strings that start with a given prefix string.
+
     Time complexity of these methods depends only on the number of strings
     retrieved and their maximum length (size and height of subtree searched),
     but is independent of the number of strings stored in the prefix tree, as
     its height depends only on the length of the longest string stored in it.
+
     This makes a prefix tree effective for spell-checking and autocompletion.
     Each string is stored as a sequence of characters along a path from the
-    tree's root node to a terminal node that marks the end of the string."""
+    tree's root node to a terminal node that marks the end of the string.
+    """
 
     # Constant for the start character stored in the prefix tree's root node
     START_CHARACTER = ''
 
     def __init__(self, strings=None):
-        """Initialize this prefix tree and insert the given strings, if any."""
+        """
+        Initialize this prefix tree and insert the given strings, if any.
+        """
         # Create a new root node with the start character
         self.root = PrefixTreeNode(PrefixTree.START_CHARACTER)
         # Count the number of strings inserted into the tree
@@ -30,20 +38,48 @@ class PrefixTree:
                 self.insert(string)
 
     def __repr__(self):
-        """Return a string representation of this prefix tree."""
+        """
+        Return a string representation of this prefix tree.
+        """
         return f'PrefixTree({self.strings()!r})'
 
     def is_empty(self):
-        """Return True if this prefix tree is empty (contains no strings)."""
-        # TODO
+        """
+        Return True if this prefix tree is empty (contains no strings).
+        """
+        return self.size == 0
 
     def contains(self, string):
-        """Return True if this prefix tree contains the given string."""
-        # TODO
+        """
+        Return True if this prefix tree contains the given string.
+        """
+        # Start with root
+        node = self.root
+        # Iterate through letters in string
+        for letter in string:
+            # Check if node has child matching letter
+            if not node.has_child(letter):
+                return False
+            # Move to next node
+            node = node.get_child(letter)
+        # Returns node if it is an ending node
+        return node.terminal
 
     def insert(self, string):
-        """Insert the given string into this prefix tree."""
-        # TODO
+        """
+        Insert the given string into this prefix tree.
+        """
+        # Start with root
+        node = self.root
+        # Iterate through letters in string
+        for letter in string:
+            # Check if node has child matching letter
+            if node.has_child(letter):
+                return False
+            # Move to next node
+            node = node.get_child(letter)
+        # Returns node if it is an ending node
+        return node.terminal
 
     def _find_node(self, string):
         """Return a tuple containing the node that terminates the given string
