@@ -48,6 +48,15 @@ class PrefixTreeNode:
         """
         # Check if given character is amongst this node's children
         return character in self.children.keys()
+        
+    def get_all_children(self):
+        """
+        Returns an array of all child nodes
+        """
+        children = []
+        for char in self.children.keys():
+            children.append(self.get_child(char))
+        return children
 
     def get_child(self, character):
         """
@@ -110,7 +119,6 @@ if __name__ == "__main__":
     # Let's try to access j from root
     print(f"True => {root.children['k'].has_child('j')}")
 
-    # raise error if not a letter
-    # if not character.isalpha():
-    #     raise TypeError("child node is a not a letter")
-    # print(node.has_child("1"))
+    # TEST: get_all_children()
+    # root only has one child => (k)
+    print(f"(k) => {root.get_all_children()}")

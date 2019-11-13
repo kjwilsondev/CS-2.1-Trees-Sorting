@@ -19,6 +19,10 @@ class PrefixTreeNode:
         empty structure of children nodes, and a boolean terminal property.
         """
         # Character that this node represents
+        # raise error if not a letter
+        # if not character.isalpha():
+        #     raise TypeError("child node is a not a letter")
+        # print(node.has_child("1"))
         self.character = character
         # Data structure to associate character keys to children node values
         # self.children = PrefixTreeNode.CHILDREN_TYPE()
@@ -111,8 +115,3 @@ if __name__ == "__main__":
     # prints <__main__.PrefixTreeNode object at storage refrence>
     # Let's try to access j from root
     print(f"True => {root.children[ord('k')-97].has_child('j')}")
-
-    # raise error if not a letter
-    # if not character.isalpha():
-    #     raise TypeError("child node is a not a letter")
-    # print(node.has_child("1"))
