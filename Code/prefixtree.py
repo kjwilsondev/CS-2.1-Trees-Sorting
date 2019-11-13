@@ -32,6 +32,8 @@ class PrefixTree:
         self.root = PrefixTreeNode(PrefixTree.START_CHARACTER)
         # Count the number of strings inserted into the tree
         self.size = 0
+        # Array of strings in tree
+        self.strings = []
         # Insert each string, if any were given
         if strings is not None:
             for string in strings:
@@ -72,41 +74,61 @@ class PrefixTree:
         # Start with root
         node = self.root
         depth = 0
+        # Add string to tree strings
+        self.strings.append(string)
         # Iterate through letters in string
         for letter in string:
             # Check if node has child matching letter
             if node.has_child(letter):
                 # move on to the next node
                 node = node.get_child(letter)
-                depth = node.depth
+                depth += 1
+                node.depth = depth
             else:
                 # create a child node
                 child = PrefixTreeNode(letter)
+                depth += 1
                 # add it as a child to the node
                 node.add_child(letter, child)
                 # move on to the next node
                 node = node.get_child(letter)
-                node.depth += 1
+                node.depth = depth
         # On the last node make terminal true
         node.terminal = True
         # no return statement
 
     def _find_node(self, string):
         """
-        Return a tuple containing the node that terminates the given string
-        in this prefix tree and the node's depth, or if the given string is not
-        completely found, return None and the depth of the last matching node.
-        Search is done iteratively with a loop starting from the root node."""
+        Return a tuple containing:
+        (the node that terminates the given string, and the node's depth)
+        if the given string is not completely found, 
+        return (None, depth of the last matching node)
+        Search is done iteratively with a loop starting from the root node.
+        """
         # Match the empty string
         if len(string) == 0:
             return self.root, 0
         # Start with the root node
         node = self.root
-        # TODO
-
+        # Keep track of depth
+        depth = 0
+        # Iterate through letters in string
+        for letter in string:
+            # Check if node has child matching letter
+            if not node.has_child(letter):
+                return (None, depth)
+            else:
+                depth += 1
+                # move on to the next node
+                node = node.get_child(letter)
+        print(f"depth: {depth}, node.depth: {node.depth}")
+        return(node, depth)
+                
     def complete(self, prefix):
-        """Return a list of all strings stored in this prefix tree that start
-        with the given prefix string."""
+        """
+        Return a list of all strings stored in this prefix tree that start
+        with the given prefix string.
+        """
         # Create a list of completions in prefix tree
         completions = []
         # TODO
@@ -114,8 +136,7 @@ class PrefixTree:
     def strings(self):
         """Return a list of all strings stored in this prefix tree."""
         # Create a list of all strings in prefix tree
-        all_strings = []
-        # TODO
+        # return self.strings
 
     def _traverse(self, node, prefix, visit):
         """Traverse this prefix tree with recursive depth-first traversal.
