@@ -9,16 +9,10 @@ def is_sorted(items):
     Running time: O(n) - iterates through all elements in array  worst case
     Memory usage: O(1) - no new memory used
     """
-    # for i, item in enumerate(items):
-    #     if i == len(items) - 1:
-    #         return True
-    #     if item > items[i+1]:
-    #         return False
-    for i in range(0, len(items)):
-        if items[i] == len(items) - 1:
-            return True
+    for i in range(0, len(items) - 1):
         if items[i] > items[i+1]:
             return False
+    return True
 
 def bubble_sort(items):
     """
@@ -27,22 +21,27 @@ def bubble_sort(items):
     Running time: O(n^2) - for loop within a while loop
     Memory usage: O(logn) - new slice made for every for loop iteration, every slice gets smaller
     """
-    size = len(arr)
+    size = len(items)
     print(f"size: {size}")
+
+    if is_sorted(items):
+        print(f"list already sorted")
+        return
+    
     while size > 0:
         # i for index
         # e for array[element]
         for i in range(0, size):
             # check if last in list
             if i == size - 1:
-                print(f"index {i}: {arr[i]} is set!")
+                print(f"index {i}: {items[i]} is set!")
                 break
             # checks if neighbor is bigger
-            print(f"checking index {i+1}, val {arr[i+1]}")
-            if arr[i] > arr[i+1]:
-                print(f"switching {i}: {arr[i]} and {i+1}: {arr[i+1]}")
-                arr[i], arr[i+1] = arr[i+1], arr[i]
-                print(arr)
+            print(f"checking index {i+1}, val {items[i+1]}")
+            if items[i] > items[i+1]:
+                print(f"switching {i}: {items[i]} and {i+1}: {items[i+1]}")
+                items[i], items[i+1] = items[i+1], items[i]
+                print(items)
         # biggest element has been moved to end
         size -= 1
 
@@ -53,8 +52,25 @@ def selection_sort(items):
     Running time: ??? Why and under what conditions?
     Memory usage: ??? Why and under what conditions?
     """
+    if is_sorted(items):
+        print(f"list already sorted")
+        return
+
     # Repeat until all items are in sorted order
-    # TODO: Find minimum item in unsorted items
+    while size > 0:
+        # i for index
+        # e for array[element]
+        for i in range(0, size):
+            # Find minimum item in unsorted items
+            print(f"checking index {i+1}, val {items[i+1]}")
+            # minimum index
+            min_i, min
+            min_v = min(min_val, arr[i])
+                print(f"switching {i}: {arr[i]} and {i+1}: {arr[i+1]}")
+                arr[i], arr[i+1] = arr[i+1], arr[i]
+                print(arr)
+        # biggest element has been moved to end
+        size -= 1
     # TODO: Swap it with first unsorted item
 
 
