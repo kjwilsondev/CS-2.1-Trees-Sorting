@@ -33,24 +33,26 @@ def bubble_sort(items):
         # i for index
         # e for array[element]
         for i in range(0, size):
-            # print(i, arr[i])
-            # print(arr)
             # check if last in list
             if i == size - 1:
+                print(f"index {i}: {arr[i]} is set!")
                 break
             # checks if neighbor is bigger
+            print(f"checking index {i+1}, val {arr[i+1]}")
             if arr[i] > arr[i+1]:
+                print(f"switching {i}: {arr[i]} and {i+1}: {arr[i+1]}")
                 arr[i], arr[i+1] = arr[i+1], arr[i]
+                print(arr)
         # biggest element has been moved to end
         size -= 1
 
-
-
 def selection_sort(items):
-    """Sort given items by finding minimum item, swapping it with first
+    """
+    Sort given items by finding minimum item, swapping it with first
     unsorted item, and repeating until all items are in sorted order.
-    TODO: Running time: ??? Why and under what conditions?
-    TODO: Memory usage: ??? Why and under what conditions?"""
+    Running time: ??? Why and under what conditions?
+    Memory usage: ??? Why and under what conditions?
+    """
     # Repeat until all items are in sorted order
     # TODO: Find minimum item in unsorted items
     # TODO: Swap it with first unsorted item

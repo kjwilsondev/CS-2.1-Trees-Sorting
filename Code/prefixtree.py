@@ -131,7 +131,7 @@ class PrefixTree:
         """
         # Create a list of completions in prefix tree
         completions = []
-        # TODO
+        return completions
 
     def strings(self):
         """Return a list of all strings stored in this prefix tree."""
