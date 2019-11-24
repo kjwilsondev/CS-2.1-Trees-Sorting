@@ -55,23 +55,26 @@ def selection_sort(items):
     if is_sorted(items):
         print(f"list already sorted")
         return
-
-    # Repeat until all items are in sorted order
-    while size > 0:
-        # i for index
-        # e for array[element]
-        for i in range(0, size):
-            # Find minimum item in unsorted items
-            print(f"checking index {i+1}, val {items[i+1]}")
-            # minimum index
-            min_i, min
-            min_v = min(min_val, arr[i])
-                print(f"switching {i}: {arr[i]} and {i+1}: {arr[i+1]}")
-                arr[i], arr[i+1] = arr[i+1], arr[i]
-                print(arr)
-        # biggest element has been moved to end
-        size -= 1
-    # TODO: Swap it with first unsorted item
+    
+    start = 1
+    switch = False
+    for e in range(0, len(items)-1):
+        print(f"current num: {items[e]}")
+        # set min_val to first element
+        min_val = items[e]
+        print(f"min: {min_val}")
+        for i in range(start, len(items)-1):
+            print(f"checking index {i}, val {items[i]}")
+            if min_val > items[i]:
+                switch = True
+                min_ndx = i
+                min_val = items[i]
+                print(f"new min: {min_val}")
+        if switch:
+            print(f"switching {items[e]} and {items[min_ndx]}")
+            items[min_ndx], items[e] = items[e], min_val
+            print(f"array: {items}")
+        start += 1
 
 
 def insertion_sort(items):
@@ -98,6 +101,12 @@ if __name__ == "__main__":
             print(f"Method: Bubble Sort")
             print(f"Sorting...")
             bubble_sort(arr)
+            print(f"Done")
+            print(f"array: {arr}")
+        if method == "s":
+            print(f"Method: Selection Sort")
+            print(f"Sorting...")
+            selection_sort(arr)
             print(f"Done")
             print(f"array: {arr}")
         else:
