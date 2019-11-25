@@ -51,7 +51,7 @@ class PrefixTreeNode:
         represents the given character amongst its children.
         """
         # Check if given character is amongst this node's children
-        return character in self.children.keys()
+        return character in self.children
         
     def get_all_children(self):
         """
