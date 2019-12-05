@@ -1,4 +1,4 @@
-#!python
+#!python3
 
 import os
 import time
@@ -47,8 +47,9 @@ def bubble_sort(items):
 
 def selection_sort(items):
     """
-    Sort given items by finding minimum item, swapping it with first
-    unsorted item, and repeating until all items are in sorted order.
+    Sort given items by finding minimum item, 
+    swapping it with first unsorted item, 
+    and repeating until all items are in sorted order.
     Running time: ??? Why and under what conditions?
     Memory usage: ??? Why and under what conditions?
     """
@@ -56,12 +57,13 @@ def selection_sort(items):
         print(f"list already sorted")
         return
     
-    start = 1
+    start = 0
     switch = False
     for e in range(0, len(items)-1):
         print(f"current num: {items[e]}")
         # set min_val to first element
         min_val = items[e]
+        switch = False
         print(f"min: {min_val}")
         for i in range(start, len(items)-1):
             print(f"checking index {i}, val {items[i]}")
@@ -69,6 +71,7 @@ def selection_sort(items):
                 switch = True
                 min_ndx = i
                 min_val = items[i]
+                print(items)
                 print(f"new min: {min_val}")
         if switch:
             print(f"switching {items[e]} and {items[min_ndx]}")
@@ -89,6 +92,7 @@ def insertion_sort(items):
 if __name__ == "__main__":
 
     arr = [1, 6, 7, 3, 5]
+    arr = [0, -1, 33, 378, 33, 1]
     print(f"array: {arr}")
     print(f"is sorted: {is_sorted(arr)}")
     if is_sorted(arr):
@@ -109,8 +113,8 @@ if __name__ == "__main__":
             selection_sort(arr)
             print(f"Done")
             print(f"array: {arr}")
-        else:
-            print("method not found")
+        # else:
+        #     print("method not found")
 
     
 
