@@ -50,8 +50,8 @@ def selection_sort(items):
     Sort given items by finding minimum item, 
     swapping it with first unsorted item, 
     and repeating until all items are in sorted order.
-    Running time: ??? Why and under what conditions?
-    Memory usage: ??? Why and under what conditions?
+    Running time: O(n^2) - for loop within a while loop
+    Memory usage: O(logn) - new slice made for every for loop iteration, every slice gets smaller
     """
     if is_sorted(items):
         print(f"list already sorted")
@@ -65,7 +65,7 @@ def selection_sort(items):
         min_val = items[e]
         switch = False
         print(f"min: {min_val}")
-        for i in range(start, len(items)-1):
+        for i in range(start, len(items)):
             print(f"checking index {i}, val {items[i]}")
             if min_val > items[i]:
                 switch = True
@@ -92,7 +92,7 @@ def insertion_sort(items):
 if __name__ == "__main__":
 
     arr = [1, 6, 7, 3, 5]
-    arr = [0, -1, 33, 378, 33, 1]
+    # arr = [0, -1, 33, 378, 33, 1]
     print(f"array: {arr}")
     print(f"is sorted: {is_sorted(arr)}")
     if is_sorted(arr):
