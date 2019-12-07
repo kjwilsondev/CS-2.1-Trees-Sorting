@@ -27,18 +27,20 @@ def merge(items1, items2):
     return items
 
 def split_sort_merge(items):
-    """Sort given items by splitting list into two approximately equal halves,
+    """
+    Sort given items by splitting list into two approximately equal halves,
     sorting each with an iterative sorting algorithm, and merging results into
     a list in sorted order.
-    TODO: Running time: ??? Why and under what conditions?
-    TODO: Memory usage: ??? Why and under what conditions?"""
+    Running time: O(sorting_method()) - depends on the sorting method chosed
+    Memory usage: O(n + sorting_method()) - slicing and sorting method
+    """
     # Split items list into approximately equal halves
     mid = (len(items)-1)//2
     half1, half2 = items[:mid], items[mid:]
     print(half1, half2)
     # Sort each half using any other sorting algorithm
-    selection_sort(half1)
-    selection_sort(half2)
+    selection_sort(half1) # O(n^2)
+    selection_sort(half2) # O(n^2)
     # Merge sorted halves into one list in sorted order
     merged = merge(half1, half2)
     return merged
