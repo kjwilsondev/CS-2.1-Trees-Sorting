@@ -60,19 +60,19 @@ def selection_sort(items):
     start = 0
     switch = False
     for e in range(0, len(items)-1):
-        print(f"current num: {items[e]}")
+        # print(f"current num: {items[e]}")
         # set min_val to first element
         min_val = items[e]
         switch = False
-        print(f"min: {min_val}")
+        # print(f"min: {min_val}")
         for i in range(start, len(items)):
-            print(f"checking index {i}, val {items[i]}")
+            # print(f"checking index {i}, val {items[i]}")
             if min_val > items[i]:
                 switch = True
                 min_ndx = i
                 min_val = items[i]
-                print(items)
-                print(f"new min: {min_val}")
+                # print(items)
+                # print(f"new min: {min_val}")
         if switch:
             print(f"switching {items[e]} and {items[min_ndx]}")
             items[min_ndx], items[e] = items[e], min_val

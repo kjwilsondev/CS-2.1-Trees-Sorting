@@ -1,13 +1,13 @@
 #!python3
 
-from sorting_iterative import is_sorted
+from sorting_iterative import is_sorted, selection_sort
 
 def merge(items1, items2):
     """
     Merge given lists of items, each assumed to already be in sorted order,
     and return a new list containing all items in sorted order.
-    TODO: Running time: ??? Why and under what conditions?
-    TODO: Memory usage: ??? Why and under what conditions?
+    Running time: O(m) or O(n), iterates all the way through the shorter input list
+    Memory usage: O(m + n) - new array output
     """
     items = []
     # Repeat until one list is empty
@@ -32,10 +32,16 @@ def split_sort_merge(items):
     a list in sorted order.
     TODO: Running time: ??? Why and under what conditions?
     TODO: Memory usage: ??? Why and under what conditions?"""
-    # TODO: Split items list into approximately equal halves
-    # TODO: Sort each half using any other sorting algorithm
-    # TODO: Merge sorted halves into one list in sorted order
-
+    # Split items list into approximately equal halves
+    mid = (len(items)-1)//2
+    half1, half2 = items[:mid], items[mid:]
+    print(half1, half2)
+    # Sort each half using any other sorting algorithm
+    selection_sort(half1)
+    selection_sort(half2)
+    # Merge sorted halves into one list in sorted order
+    merged = merge(half1, half2)
+    return merged
 
 def merge_sort(items):
     """Sort given items by splitting list into two approximately equal halves,
@@ -77,7 +83,9 @@ if __name__ == "__main__":
 
     print("run tests")
     print("merge for merge test")
+    print("split for split sort merge test")
     method = input("method: ")
+
     if method == "merge":
         print("...")
         print("merge test")
@@ -91,11 +99,24 @@ if __name__ == "__main__":
         # print(f"array: {arr2}")
         # print(f"2nd list has {len(arr2)} elements")
         # print(f"is sorted: {is_sorted(arr2)}")
-        merged = (merge(arr1, arr2))
+        result = (merge(arr1, arr2))
         # print(f"merged array: {merged}")
         # print(f"return string has {len(merged)} elements")
         # print(f"return string should have {len_arr} elements")
-        if len_arr == len(merged):
+        if len_arr == len(result):
             print("...PASS")
         else:
-            print("...FAILs")
+            print("...FAIL")
+    
+    if method == "split":
+        print("...")
+        print("split sort merge test")
+        print("...")
+        arr = [8, 3, 7, 6, 1]
+        len_arr = len(arr)
+        result = split_sort_merge(arr)
+        if len_arr == len(result):
+            print("...PASS")
+        else:
+            print("...FAIL")
+
