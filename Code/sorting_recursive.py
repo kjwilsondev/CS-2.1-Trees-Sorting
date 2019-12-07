@@ -1,15 +1,30 @@
-#!python
+#!python3
 
+from sorting_iterative import is_sorted
 
 def merge(items1, items2):
-    """Merge given lists of items, each assumed to already be in sorted order,
+    """
+    Merge given lists of items, each assumed to already be in sorted order,
     and return a new list containing all items in sorted order.
     TODO: Running time: ??? Why and under what conditions?
-    TODO: Memory usage: ??? Why and under what conditions?"""
-    # TODO: Repeat until one list is empty
-    # TODO: Find minimum item in both lists and append it to new list
-    # TODO: Append remaining items in non-empty list to new list
-
+    TODO: Memory usage: ??? Why and under what conditions?
+    """
+    items = []
+    # Repeat until one list is empty
+    while len(items1) > 0 and len(items2) > 0:
+        # Find minimum item in both lists and append it to new list
+        if items1[0] < items2[0]:
+            items.append(items1[0])
+            del items1[0]
+        else:
+            items.append(items2[0])
+            del items2[0]
+    # Append remaining items in non-empty list to new list
+    if len(items1) > 0:
+        items.extend(items1)
+        return items
+    items.extend(items2)
+    return items
 
 def split_sort_merge(items):
     """Sort given items by splitting list into two approximately equal halves,
@@ -57,3 +72,30 @@ def quick_sort(items, low=None, high=None):
     # TODO: Check if list or range is so small it's already sorted (base case)
     # TODO: Partition items in-place around a pivot and get index of pivot
     # TODO: Sort each sublist range by recursively calling quick sort
+
+if __name__ == "__main__":
+
+    print("run tests")
+    print("merge for merge test")
+    method = input("method: ")
+    if method == "merge":
+        print("...")
+        print("merge test")
+        print("...")
+        arr1 = [1, 3, 5, 6, 7]
+        arr2 = [-1, 0, 1, 33, 33, 378]
+        len_arr = len(arr1) + len(arr2)
+        # print(f"array: {arr1}")
+        # print(f"1st list has {len(arr1)} elements")
+        # print(f"is sorted: {is_sorted(arr1)}")
+        # print(f"array: {arr2}")
+        # print(f"2nd list has {len(arr2)} elements")
+        # print(f"is sorted: {is_sorted(arr2)}")
+        merged = (merge(arr1, arr2))
+        # print(f"merged array: {merged}")
+        # print(f"return string has {len(merged)} elements")
+        # print(f"return string should have {len_arr} elements")
+        if len_arr == len(merged):
+            print("...PASS")
+        else:
+            print("...FAILs")
