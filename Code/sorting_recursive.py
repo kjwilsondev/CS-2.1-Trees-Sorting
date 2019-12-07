@@ -19,11 +19,12 @@ def merge(items1, items2):
         else:
             items.append(items2[0])
             del items2[0]
+
     # Append remaining items in non-empty list to new list
     if len(items1) > 0:
         items.extend(items1)
-        return items
-    items.extend(items2)
+    else:
+        items.extend(items2)
     return items
 
 def split_sort_merge(items):
@@ -37,32 +38,58 @@ def split_sort_merge(items):
     # Split items list into approximately equal halves
     mid = (len(items)-1)//2
     half1, half2 = items[:mid], items[mid:]
-    print(half1, half2)
+    # print(half1, half2)
+
     # Sort each half using any other sorting algorithm
     selection_sort(half1) # O(n^2)
     selection_sort(half2) # O(n^2)
+    # print(half1, half2)
+
     # Merge sorted halves into one list in sorted order
-    merged = merge(half1, half2)
-    return merged
+    items[:] = merge(half1, half2)
+    # print(items)
+    return items
 
 def merge_sort(items):
-    """Sort given items by splitting list into two approximately equal halves,
+    """
+    Sort given items by splitting list into two approximately equal halves,
     sorting each recursively, and merging results into a list in sorted order.
     TODO: Running time: ??? Why and under what conditions?
-    TODO: Memory usage: ??? Why and under what conditions?"""
-    # TODO: Check if list is so small it's already sorted (base case)
-    # TODO: Split items list into approximately equal halves
-    # TODO: Sort each half by recursively calling merge sort
-    # TODO: Merge sorted halves into one list in sorted order
+    TODO: Memory usage: ??? Why and under what conditions?
+    """
+    # Check if list is so small it's already sorted (base case)
+    if len(items) <= 1:
+        # print(f"should be one{items}")
+        return
+    if is_sorted(items):
+        # print(f"sorted: {items}")
+        return
+
+    # Split items list into approximately equal halves
+    mid = (len(items))//2
+    half1, half2 = items[:mid], items[mid:]
+    # print(f"split: {half1, half2}")
+
+    # Sort each half by recursively calling merge sort
+    merge_sort(half1)
+    merge_sort(half2)
+    # print(f"merge: {half1, half2}")
+
+    # Merge sorted halves into one list in sorted order
+    items[:] = merge(half1,half2)
+    return
+    
 
 
 def partition(items, low, high):
-    """Return index `p` after in-place partitioning given items in range
+    """
+    Return index `p` after in-place partitioning given items in range
     `[low...high]` by choosing a pivot (TODO: document your method here) from
     that range, moving pivot into index `p`, items less than pivot into range
     `[low...p-1]`, and items greater than pivot into range `[p+1...high]`.
     TODO: Running time: ??? Why and under what conditions?
-    TODO: Memory usage: ??? Why and under what conditions?"""
+    TODO: Memory usage: ??? Why and under what conditions?
+    """
     # TODO: Choose a pivot any way and document your method in docstring above
     # TODO: Loop through all items in range [low...high]
     # TODO: Move items less than pivot into front of range [low...p-1]
@@ -84,11 +111,12 @@ def quick_sort(items, low=None, high=None):
 if __name__ == "__main__":
 
     print("run tests")
-    print("merge for merge test")
+    print("m for merge test")
     print("split for split sort merge test")
+    print("merge for merge sort test")
     method = input("method: ")
 
-    if method == "merge":
+    if method == "m":
         print("...")
         print("merge test")
         print("...")
@@ -118,6 +146,19 @@ if __name__ == "__main__":
         len_arr = len(arr)
         result = split_sort_merge(arr)
         if len_arr == len(result):
+            print("...PASS")
+        else:
+            print("...FAIL")
+
+    if method == "merge":
+        print("...")
+        print("merge sort test")
+        print("...")
+        arr = [8, 3, 7, 6, 1]
+        len_arr = len(arr)
+        merge_sort(arr)
+        print(arr)
+        if len_arr == len(arr):
             print("...PASS")
         else:
             print("...FAIL")
