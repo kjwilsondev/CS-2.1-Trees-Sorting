@@ -89,27 +89,10 @@ def insertion_sort(items):
     """
     # Repeat until all items are in sorted order
     for i in range(1, len(items)):
-        print(f"i: {i}, {items[i]}")
-        # Take first unsorted item
-        if items[i-1] > items[i]:
-            print(f"{items[i-1]} is bigger than {items[i]}")
-            # Insert it in sorted order in front of items
-            insert = False
-            j = i - 1
-            while j >= 0 and not insert:
-                print(f"j: {j}, {items[j]}")
-                if items[i] >= items[j]:
-                    print(f"inserting {items[i]} after {items[j]}")
-                    element = items.pop(i)
-                    items.insert(j+1, element)
-                    print(items)
-                    insert = True
-                if not insert and j == 0:
-                    print(f"inserting {items[i]} at the front")
-                    element = items.pop(i)
-                    items.insert(j, element)
-                    print(items)
-                j -= 1
+        j = i
+        while (j > 0) and (items[j] < items[j-1]):
+            items[j], items[j-1] = items[j-1], items[j]
+            j -= 1
 
 if __name__ == "__main__":
 
