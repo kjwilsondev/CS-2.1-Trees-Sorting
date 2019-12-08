@@ -84,29 +84,39 @@ def insertion_sort(items):
     """
     Sort given items by taking first unsorted item, inserting it in sorted
     order in front of items, and repeating until all items are in order.
-    Running time: ??? Why and under what conditions?
-    Memory usage: ??? Why and under what conditions?
+    Running time: O(n^2) - for loop and a while function
+    Memory usage: O(n) - goes through each element for comparison
     """
     # Repeat until all items are in sorted order
-    for i in range(0, len(items)-1):
+    for i in range(1, len(items)):
         print(f"i: {i}, {items[i]}")
         # Take first unsorted item
-        if items[i] > items[i+1]:
+        if items[i-1] > items[i]:
+            print(f"{items[i-1]} is bigger than {items[i]}")
             # Insert it in sorted order in front of items
-            for j in reversed(range(0, i)):
+            insert = False
+            j = i - 1
+            while j >= 0 and not insert:
                 print(f"j: {j}, {items[j]}")
-                if items[i] > items[j]:
+                if items[i] >= items[j]:
                     print(f"inserting {items[i]} after {items[j]}")
                     element = items.pop(i)
                     items.insert(j+1, element)
                     print(items)
-                print("break")
-                break
+                    insert = True
+                if not insert and j == 0:
+                    print(f"inserting {items[i]} at the front")
+                    element = items.pop(i)
+                    items.insert(j, element)
+                    print(items)
+                j -= 1
 
 if __name__ == "__main__":
 
     arr = [1, 6, 7, 3, 5]
     # arr = [0, -1, 33, 378, 33, 1]
+    arr = 'one fish two fish red fish blue fish'.split()
+    arr = [3, 5, 3]
     print(f"array: {arr}")
     print(f"is sorted: {is_sorted(arr)}")
     if is_sorted(arr):
