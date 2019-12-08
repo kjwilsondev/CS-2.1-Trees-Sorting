@@ -81,20 +81,35 @@ def merge_sort(items):
     
 
 
-def partition(items, low, high):
+def partition(items, low, high, method="first"):
     """
     Return index `p` after in-place partitioning given items in range
-    `[low...high]` by choosing a pivot (TODO: document your method here) from
+    `[low...high]` by choosing a pivot (method) from
     that range, moving pivot into index `p`, items less than pivot into range
     `[low...p-1]`, and items greater than pivot into range `[p+1...high]`.
-    TODO: Running time: ??? Why and under what conditions?
-    TODO: Memory usage: ??? Why and under what conditions?
+    Running time: O(n) 
+    - n = number of elements in between low and high
+    - compares each element to pivot
+    Memory usage: O(1) - inserting and deleting equally
     """
-    # TODO: Choose a pivot any way and document your method in docstring above
-    # TODO: Loop through all items in range [low...high]
-    # TODO: Move items less than pivot into front of range [low...p-1]
-    # TODO: Move items greater than pivot into back of range [p+1...high]
-    # TODO: Move pivot item into final position [p] and return index p
+
+    # Choose a pivot
+    if method == "first":
+        pivot = items[low]
+        pivot_ndx = low
+        print(f"pivot: {pivot}")
+
+    # Loop through all items
+    for i in range(low + 1, high + 1):
+        # Move items greater than pivot into back of range [p+1...high]
+        # Move items less than pivot into front of range [low...p-1]
+        if items[i] < pivot:
+            element = items.pop(i)
+            items.insert(low, element)
+            # Move pivot item into final position [p]
+            pivot_ndx += 1
+    # return index p
+    return pivot_ndx
 
 
 def quick_sort(items, low=None, high=None):
@@ -114,6 +129,7 @@ if __name__ == "__main__":
     print("m for merge test")
     print("split for split sort merge test")
     print("merge for merge sort test")
+    print("partition for partition test")
     method = input("method: ")
 
     if method == "m":
@@ -157,6 +173,19 @@ if __name__ == "__main__":
         arr = [8, 3, 7, 6, 1]
         len_arr = len(arr)
         merge_sort(arr)
+        print(arr)
+        if len_arr == len(arr):
+            print("...PASS")
+        else:
+            print("...FAIL")
+
+    if method == "partition":
+        print("...")
+        print("partition test")
+        print("...")
+        arr = [8, 3, 7, 6, 1]
+        len_arr = len(arr)
+        partition(arr, 0, len(arr)-1)
         print(arr)
         if len_arr == len(arr):
             print("...PASS")
