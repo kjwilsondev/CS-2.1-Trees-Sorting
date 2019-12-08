@@ -113,15 +113,31 @@ def partition(items, low, high, method="first"):
 
 
 def quick_sort(items, low=None, high=None):
-    """Sort given items in place by partitioning items in range `[low...high]`
+    """
+    Sort given items in place by partitioning items in range `[low...high]`
     around a pivot item and recursively sorting each remaining sublist range.
-    TODO: Best case running time: ??? Why and under what conditions?
+    Best case running time: 
     TODO: Worst case running time: ??? Why and under what conditions?
-    TODO: Memory usage: ??? Why and under what conditions?"""
-    # TODO: Check if high and low range bounds have default values (not given)
-    # TODO: Check if list or range is so small it's already sorted (base case)
-    # TODO: Partition items in-place around a pivot and get index of pivot
-    # TODO: Sort each sublist range by recursively calling quick sort
+    TODO: Memory usage: ??? Why and under what conditions?
+    """
+    # Check if high and low range bounds have default values (not given)
+    if low is None:
+        print(low, "here")
+        low = 0
+    if high is None:
+        high = len(items) - 1
+
+    # Check if list or range is so small it's already sorted (base case)
+    if (high-low) < 1:
+        # print(f"should be one{items}")
+        return
+
+    # Partition items in-place around a pivot and get index of pivot
+    p = partition(items, low, high)
+
+    # Sort each sublist range by recursively calling quick sort
+    quick_sort(items, low, p-1)
+    quick_sort(items, p+1, high)
 
 if __name__ == "__main__":
 

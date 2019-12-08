@@ -81,13 +81,27 @@ def selection_sort(items):
 
 
 def insertion_sort(items):
-    """Sort given items by taking first unsorted item, inserting it in sorted
+    """
+    Sort given items by taking first unsorted item, inserting it in sorted
     order in front of items, and repeating until all items are in order.
-    TODO: Running time: ??? Why and under what conditions?
-    TODO: Memory usage: ??? Why and under what conditions?"""
-    # TODO: Repeat until all items are in sorted order
-    # TODO: Take first unsorted item
-    # TODO: Insert it in sorted order in front of items
+    Running time: ??? Why and under what conditions?
+    Memory usage: ??? Why and under what conditions?
+    """
+    # Repeat until all items are in sorted order
+    for i in range(0, len(items)-1):
+        print(f"i: {i}, {items[i]}")
+        # Take first unsorted item
+        if items[i] > items[i+1]:
+            # Insert it in sorted order in front of items
+            for j in reversed(range(0, i)):
+                print(f"j: {j}, {items[j]}")
+                if items[i] > items[j]:
+                    print(f"inserting {items[i]} after {items[j]}")
+                    element = items.pop(i)
+                    items.insert(j+1, element)
+                    print(items)
+                print("break")
+                break
 
 if __name__ == "__main__":
 
@@ -100,19 +114,30 @@ if __name__ == "__main__":
     else:
         print("b for bubble sort")
         print("s for selection sort")
+        print("i for insertion sort")
         method = input("method: ")
+
         if method == "b":
             print(f"Method: Bubble Sort")
             print(f"Sorting...")
             bubble_sort(arr)
             print(f"Done")
             print(f"array: {arr}")
+
         if method == "s":
             print(f"Method: Selection Sort")
             print(f"Sorting...")
             selection_sort(arr)
             print(f"Done")
             print(f"array: {arr}")
+        
+        if method == "i":
+            print(f"Method: Insertion Sort")
+            print(f"Sorting...")
+            insertion_sort(arr)
+            print(f"Done")
+            print(f"array: {arr}")
+
         # else:
         #     print("method not found")
 
