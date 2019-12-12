@@ -1,6 +1,13 @@
+#!python3
 """Autocomplete Dictionary Input Challenge"""
+# to play the game:
+# uncomment the game function
+# to compare iterative and tree autocomplete functions
+# uncomment the benchmark function
 
 import sys
+from prefixtree import PrefixTree
+import timeit
 
 def load(text):
     """
@@ -11,6 +18,7 @@ def load(text):
     file.close()
     return words
 
+# Old iterative method
 def select(word_part, text):
     """
     Adds words in text that match beginning to words list
@@ -29,8 +37,6 @@ def select(word_part, text):
 
     return words
 
-
-
 def game():
     print("\nWelcome to Autocomplete\n")
 
@@ -41,7 +47,8 @@ def game():
         sys.exit(1)
 
     loads   = load("/usr/share/dict/words")
-    words   = select(str(word_part), loads)
+    tree    = PrefixTree(loads)
+    words   = tree.complete(word_part)
     results = print("{} results were found".format(len(words)))
     number  = input("How many results would you like?\n")
 
@@ -65,5 +72,43 @@ def game():
             print(sentence)
             count += 1
 
+def benchmark():
+    print("Let's compare our iterative and prefix tree autocomplete methods")
+    print("...")
+
+    print("First lets compare set up time")
+    print("Set up for iterative autocomplete:")
+    print("...")
+    setup = "from __main__ import load"
+    i_setup_time = timeit.timeit("load('/usr/share/dict/words')", setup=setup, number=1)
+    print("Done")
+    print("Set up for tree autocomplete:")
+    print("...")
+    setup = """from __main__ import load, PrefixTree"""
+    t_setup_time = timeit.timeit("PrefixTree(load('/usr/share/dict/words'))", setup=setup, number=1)
+    print("Done")
+
+    print("Now let's compare processing time!")
+    print("Lets see how long it takes to gather all words")
+    print("starting with the letter a")
+    print("Processing time for iterative autocomplete:")
+    print("...")
+    setup = "from __main__ import load, select"
+    i_process = timeit.timeit("select('a', load('/usr/share/dict/words'))", setup=setup, number=1)
+    i_process -= i_setup_time
+    print("Done")
+    print("Processing time for tree autocomplete:")
+    print("...")
+    setup = "from __main__ import load, PrefixTree"
+    t_process = timeit.timeit("PrefixTree(load('/usr/share/dict/words')).complete('a')", setup=setup, number=1)
+    t_process -= t_setup_time
+    print("Done")
+
+    print("iterative set up: {}".format(i_setup_time))
+    print("iterative processing: {}".format(i_process))
+    print("tree set up: {}".format(t_setup_time))
+    print("tree process: {}".format(t_process))
+
 if __name__ == '__main__':
     game()
+    # benchmark()

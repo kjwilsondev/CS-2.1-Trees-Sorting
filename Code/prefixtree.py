@@ -34,8 +34,8 @@ class PrefixTree:
         # Insert each string, if any were given
         if strings is not None:
             for string in strings:
-                self.insert(string)
-                print(f"string inserted: {string}")
+                self.insert(string.rstrip())
+                # print(f"string inserted: {string}")
 
     def __repr__(self):
         """
@@ -89,9 +89,9 @@ class PrefixTree:
                 # move on to the next node
                 node = node.get_child(letter)
                 node.depth = depth
-        if node.terminal == True:
-            print(self.root.children)
-        else:
+        # if node.terminal == True:
+            # print(self.root.children)
+        if node.terminal == False:
             self.size += 1
             # On the last node make terminal true
             node.terminal = True
@@ -161,12 +161,12 @@ class PrefixTree:
         if node.terminal == True:
             visit(prefix)
         # look at the children
-        print(node.children)
+        # print(node.children)
         for key in node.children:
             value = node.children[key]
-            print(key, value)
-            print(f"child: {value}")
-            print(f"child character: {key}")
+            # print(key, value)
+            # print(f"child: {value}")
+            # print(f"child character: {key}")
             self._traverse(value, prefix + value.character, visit)
 
 def create_prefix_tree(strings):
