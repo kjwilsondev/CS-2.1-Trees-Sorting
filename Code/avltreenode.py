@@ -1,8 +1,11 @@
 import os
 
-class AVLNode:
-    def __init__(self, items):
-        self.root = None
-        self.size = 0
-        for item in items:
-            self.insert(item)
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+        self.height = 0
+
+if __name__ == '__main__':
+    print("node")
