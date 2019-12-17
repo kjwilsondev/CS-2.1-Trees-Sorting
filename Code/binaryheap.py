@@ -80,11 +80,13 @@ class BinaryMinHeap(object):
         return min_item
 
     def _bubble_up(self, index):
-        """Ensure the heap ordering property is true above the given index,
+        """
+        Ensure the heap ordering property is true above the given index,
         swapping out of order items, or until the root node is reached.
         Best case running time: O(1) if parent item is smaller than this item.
         Worst case running time: O(log n) if items on path up to root node are
-        out of order. Maximum path length in complete binary tree is log n."""
+        out of order. Maximum path length in complete binary tree is log n.
+        """
         if index == 0:
             return  # This index is the root node (does not have a parent)
         if not (0 <= index <= self._last_index()):
@@ -94,10 +96,11 @@ class BinaryMinHeap(object):
         # Get the parent's index and value
         parent_index = self._parent_index(index)
         parent_item = self.items[parent_index]
-        # TODO: Swap this item with parent item if values are out of order
-        # ...
-        # TODO: Recursively bubble up again if necessary
-        # ...
+        # Swap this item with parent item if values are out of order
+        if item > parent_item:
+            self.items[index], self.items[parent_index] = self.items[parent_index], self.items[index]
+        # Recursively bubble up again if necessary
+        _bubble_up(index)
 
     def _bubble_down(self, index):
         """Ensure the heap ordering property is true below the given index,
