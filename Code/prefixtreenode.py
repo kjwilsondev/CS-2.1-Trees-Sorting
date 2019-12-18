@@ -22,7 +22,6 @@ class PrefixTreeNode:
         self.character = character
         # Data structure to associate character keys to children node values
         # self.children = PrefixTreeNode.CHILDREN_TYPE()
-        # https://stackoverflow.com/questions/10712002/create-an-empty-list-in-python-with-certain-size
         self.children = {}
         # tracks number of searches
         self.popularity = 0
