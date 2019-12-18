@@ -129,7 +129,7 @@ class BinaryMinHeap(object):
         if largest != index:
             index, largest = largest, index
             # TODO: Recursively bubble down again if necessary
-            if self._left_child_index(largest) >= self.size():
+            if not self._left_child_index(largest) >= self.size():
                 self._bubble_down(largest)
 
     def _last_index(self):
